@@ -1,0 +1,21 @@
+{
+    "name": "allan/2a",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        },
+        "files": [
+            "sistema/nucleo/configuracoes.php"
+            ]
+    },
+    "authors": [
+        {
+            "name": "Allan Barreto",
+            "email": "allancbm98@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0",
+        "pecee/simple-router": "^5.4"
+    }
+}
