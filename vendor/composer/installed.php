@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'allan/2a',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '47e503383a05f2585f8f2458aeec8c17ed06ceca',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'allan/2a' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '47e503383a05f2585f8f2458aeec8c17ed06ceca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
