@@ -6,14 +6,16 @@ use sistema\nucleo\ControladorDB;
 
 class MaquinaModelo extends ControladorDB
 {
-    /*public function buscarId(array $dados): array
+    public function filtrar(string $dado) :array|bool
     {
-        
-    }*/
+        $query = "SELECT * FROM maquina WHERE modelo = '{$dado}'";
+       return $this->conection->select($query);
+    }
     
     public function buscar(): array
     {
-        $query = "SELECT * FROM maquina";
+        //podemos organizar o array de acordo com parâmetros ORDERY BY que passamso na query
+        $query = "SELECT * FROM maquina ORDER BY modelo DESC"; 
       return $this->conection->select($query);
     }
 }

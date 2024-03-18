@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container my-2 row">
+    {% for values in modelo %}
+        <div class="col-md-4">
+            <div class="card my-4" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{values.modelo}}</h5>
+                <p class="card-text">{{values.valor_compra}}</p>
+                <a href="http://localhost/projetofabrica/sobre" class="btn btn-primary">Voltar à página anterior</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

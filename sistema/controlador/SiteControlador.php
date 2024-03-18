@@ -11,6 +11,11 @@ class SiteControlador extends Controlador
     public function __construct() {
         parent::__construct('templates/site/views');
     }
+
+    public function erro404() :void
+    {
+        echo $this->template->rendenrizar('404.html',[]);
+    }
     
     public function index() :void
     {
@@ -22,6 +27,20 @@ class SiteControlador extends Controlador
         echo $this->template->rendenrizar('sobre.html',
         [
             'dados' => (new MaquinaModelo())->buscar()
+        ]);
+    }
+
+    public function post($dado) :void
+    {
+        $modelo = (new MaquinaModelo())->filtrar($dado);
+        
+        if(!$modelo) {
+            Helpers::redirecionar('404');
+        }
+
+        echo $this->template->rendenrizar('post.html',
+        [
+            'modelo' => (new MaquinaModelo())->filtrar($dado)
         ]);
     }
 }
