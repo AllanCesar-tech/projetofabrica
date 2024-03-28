@@ -43,4 +43,12 @@ class SiteControlador extends Controlador
             'modelo' => (new MaquinaModelo())->filtrar($dado)
         ]);
     }
+
+    public function dashboard(): void
+    {
+        echo $this->template->rendenrizar('dashboard.html',
+        [
+        
+        ]);
+    }
 }

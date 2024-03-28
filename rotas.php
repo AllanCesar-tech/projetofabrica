@@ -10,6 +10,7 @@ try {
     SimpleRouter::get(BASE_ROUTE.'404','SiteControlador@erro404');
     SimpleRouter::get(BASE_ROUTE.'sobre','SiteControlador@sobre');
     SimpleRouter::get(BASE_ROUTE.'post/{dado}','SiteControlador@post');
+    SimpleRouter::get(BASE_ROUTE.'dashboard','SiteControlador@dashboard');
     SimpleRouter::start();
 
 } catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $e) {
