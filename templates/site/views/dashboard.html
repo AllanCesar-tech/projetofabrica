@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block card %} <!--retirando/sobreescrevendo formatação de card-->
+
+<canvas class="my-4 w-100 line-chart" id="myChart" width="900" height="380"></canvas>
+
+{% endblock %}
+
+{% block script %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+type: 'bar',
+data: {
+ labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Black','Zebra','Morango','Uva','Limão'],
+ datasets: [{
+   label: '# of Votes',
+   data: [12, 19, 3, 5, 2, 3, 4, 5, 7, 8, 2],
+   borderWidth: 1
+ }]
+},
+options: {
+ scales: {
+   y: {
+     beginAtZero: true
+   }
+ }
+}
+});
+ </script>
+
+{% endblock %}
