@@ -51,4 +51,12 @@ class SiteControlador extends Controlador
         
         ]);
     }
+
+    public function cadastroMaq(): void
+    {
+        echo $this->template->rendenrizar('cadastromaquina.html',
+        [
+        
+        ]);
+    }
 }

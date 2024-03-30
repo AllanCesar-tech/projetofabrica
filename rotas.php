@@ -11,6 +11,7 @@ try {
     SimpleRouter::get(BASE_ROUTE.'sobre','SiteControlador@sobre');
     SimpleRouter::get(BASE_ROUTE.'post/{dado}','SiteControlador@post');
     SimpleRouter::get(BASE_ROUTE.'dashboard','SiteControlador@dashboard');
+    SimpleRouter::get(BASE_ROUTE.'cadastro','SiteControlador@cadastroMaq');
     SimpleRouter::start();
 
 } catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $e) {
