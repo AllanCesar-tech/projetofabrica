@@ -59,4 +59,20 @@ class SiteControlador extends Controlador
         
         ]);
     }
+
+    public function cadastroLayout(): void
+    {
+        echo $this->template->rendenrizar('cadastrolayout.html',
+        [
+        
+        ]);
+    }
+
+    public function producao(): void
+    {
+        echo $this->template->rendenrizar('producao.html',
+        [
+        
+        ]);
+    }
 }
