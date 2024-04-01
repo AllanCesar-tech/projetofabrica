@@ -11,9 +11,9 @@ try {
     SimpleRouter::get(BASE_ROUTE.'sobre','SiteControlador@sobre');
     SimpleRouter::get(BASE_ROUTE.'post/{dado}','SiteControlador@post');
     SimpleRouter::get(BASE_ROUTE.'dashboard','SiteControlador@dashboard');
-    SimpleRouter::get(BASE_ROUTE.'cadastro','SiteControlador@cadastroMaq');
-    SimpleRouter::get(BASE_ROUTE.'layout','SiteControlador@cadastroLayout');
-    SimpleRouter::get(BASE_ROUTE.'producao','SiteControlador@producao');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'cadastro','SiteControlador@cadastroMaq');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'layout','SiteControlador@cadastroLayout');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'producao','SiteControlador@producao');
     SimpleRouter::start();
 
 } catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $e) {

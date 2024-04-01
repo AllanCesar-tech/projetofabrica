@@ -54,17 +54,34 @@ class SiteControlador extends Controlador
 
     public function cadastroMaq(): void
     {
-        echo $this->template->rendenrizar('cadastromaquina.html',
-        [
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if (!empty($dados)) {
+            
+            $dados['operacoes'] = (int)$dados['operacoes'];
+            $dados['qtd'] = (int)$dados['qtd'];
+            (new MaquinaModelo)->cadastrar($dados);
+            // Para validações posteriormente
+            // foreach ($dados as $key => $value) 
+            //{
+            //     if ($value == null) 
+            //     {
+            //         if ($key != 'operacoes' && $key != 'valor') {
+            //             die('Campos Obrigatórios em branco');
+            //         } else {die ('enviado com sucesso');}
+            //     } 
+           // }
+        }                
+         echo $this->template->rendenrizar('cadastromaquina.html',
+         [
         
-        ]);
+         ]);
     }
 
     public function cadastroLayout(): void
     {
         echo $this->template->rendenrizar('cadastrolayout.html',
         [
-        
+            'maquinas' => (new MaquinaModelo)->buscar()
         ]);
     }
 

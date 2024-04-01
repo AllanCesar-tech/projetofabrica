@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<form action="" method="">
+<form action="" method="post">
     <div class="text-center">
         <h1>Formulário de Cadastro</h1>
         <h2 class="text-muted">Cadastro de Máquinas</h2>
@@ -10,17 +10,17 @@
     <div class="row justify-content-center mt-4">
         <div class="col-4">
             <label for="modelo" class="form-label">Modelo</label>
-            <input type="text" class="form-control" id="modelo" placeholder="Modelo da Máquina">
+            <input type="text" class="form-control" id="modelo" placeholder="Modelo da Máquina" name="modelo">
         </div>
         <div class="col-4">
             <label for="marca" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="marca" placeholder="Nome da Marca">
+            <input type="text" class="form-control" id="marca" placeholder="Nome da Marca" name="marca">
         </div>
     </div>
     <div class="row justify-content-center mt-4">
         <div class="col-8">
             <label for="funcao" class="form-label">Função</label>
-            <textarea name="" id="funcao" class="form-control" rows="2"
+            <textarea name="funcao" id="funcao" class="form-control" rows="2"
                 placeholder="Descreva a finalidade da máquina"></textarea>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="col-8">
             <label for="op_peca" class="form-label">Operações para uma peça</label>
             <input type="number" class="form-control" id="op_peca"
-                placeholder="Por exemplo, são 2 bolsos(2 operações) para fazer uma peça">
+                placeholder="Por exemplo, são 2 bolsos(2 operações) para fazer uma peça" name="operacoes">
         </div>
     </div>
     
@@ -39,14 +39,14 @@
             <div class="flex-column">
                 <label for="valor_compra" class="form-label d-block ms-4">Valor da
                     Compra</label>
-                <input type="number" placeholder="0,00" class="form-control" id="valor_compra">
+                <input type="number" placeholder="0,00" class="form-control" id="valor_compra" name="valor">
             </div>
         </div>
     
         <div class="col-4">
             <label class="form-label" for="qtd_existente">Quantidade de Máquinas</label>
             <input type="number" placeholder="Quantidade de Máquinas na Fábrica"
-                class="form-control" id="qtd_existente">
+                class="form-control" id="qtd_existente" name="qtd">
         </div>
     </div>
     <div class="d-flex justify-content-end col-10 mt-4"><button class="btn btn-primary">Enviar</button></div>
