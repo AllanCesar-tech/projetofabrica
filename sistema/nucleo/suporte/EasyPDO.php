@@ -14,6 +14,7 @@
 
 namespace sistema\nucleo\suporte;
 
+use Exception;
 use PDO;
 
 class EasyPDO
@@ -422,39 +423,25 @@ class EasyPDO
         die(PHP_EOL . "$class_name - ERROR - $message" . PHP_EOL);
     }
 
-    // ========================================================================
-    public function insertMult(string $query, $parameters)
+    public function insertMult(array $querys)
     {
-         // runs an INSERT query
-         if (!preg_match("/^INSERT/i", trim($query))) {
-            $this->error('Not a SQL INSERT statment.');
-            return null;
+         
+        $this->connection->beginTransaction();
+                
+      try {
+        foreach ($querys as $query) {
+            $this->connection->exec($query);
         }
-
-        $command = null;
-
-        // query execution
-        // execution
-        try {
-
-            $command = $this->connection->prepare($query);
-            if ($parameters != null) {
-                foreach($parameters as $parametro) {
-                    $command->execute($parametro);
-                }
-            } else {
-                $command->execute();
-            }
-        } catch (\PDOException $e) {
-            $this->affectedRows = 0;
+        $this->connection->commit();
+      } catch (\PDOException $e) {
             $this->error($e->getMessage());
+            $this->connection->rollBack();
             return null;
-        }
-
-        //affected rows
-        $this->affectedRows = $command->rowCount();
-
-        //close connection
-        $this->connection = null;
+            
+      }
+    
+      //close connection
+      $this->connection = null;
+      
     }
-}
+}    

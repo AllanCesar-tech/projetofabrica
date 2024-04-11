@@ -26,7 +26,7 @@ class SiteControlador extends Controlador
     {
         echo $this->template->rendenrizar('sobre.html',
         [
-            'dados' => (new MaquinaModelo())->buscar()
+            'dados' => (new MaquinaModelo())->buscarMaq()
         ]);
     }
 
@@ -79,12 +79,13 @@ class SiteControlador extends Controlador
     {   
          $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
          if (!empty($dados)) {
-            var_dump((new MaquinaModelo)->montarLayout($dados));
+           //var_dump((new MaquinaModelo)->montarLayout($id, $dados));
+           (new MaquinaModelo)->montarLayout($id, $dados);
         }
           
         echo $this->template->rendenrizar('cadastrolayout.html',
         [
-            'maquinas' => (new MaquinaModelo)->buscar(),
+            'maquinas' => (new MaquinaModelo)->buscarMaq(),
             'layouts' => (new MaquinaModelo)->filtrarLayout($id)
         ]);
     }

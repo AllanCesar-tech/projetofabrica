@@ -12,7 +12,7 @@ class MaquinaModelo extends ControladorDB
        return $this->conection->select($query);
     }
     
-    public function buscar(): array
+    public function buscarMaq(): array
     {
         //podemos organizar o array de acordo com parâmetros ORDERY BY que passamso na query
         $query = "SELECT * FROM machine ORDER BY model ASC"; 
@@ -34,27 +34,22 @@ class MaquinaModelo extends ControladorDB
       $this->conection->insert($query,$dados);
     }
 
-    public function montarLayout(array $dados)
+    public function montarLayout(string $id, array $dados)
     {
-      $layoutDenomination = $dados['layout'];
-      $queryLayout = "SELECT id_layout FROM layout WHERE layout.denomination = '$layoutDenomination'";
-      $layout = $this->conection->select($queryLayout);
-      $layout = $layout[0]['id_layout'];
-      unset($dados['layout']);
+      unset($dados['layout']); // fazer formulario parar de enviar, colocar condicional
+      $querys = [];
+      //$i= 1;
+    foreach ($dados as $chave => $valor) {
       $query = "INSERT INTO layout_machine (fk_id_layout, fk_id_machine) VALUES ";
-      
-
-    foreach ($dados as $chave => $valor) 
-    { 
-      
-    }
-
-    $query = rtrim($query, ", ");
-    // $chaves = array_keys($dados);
-    // $ultimaChave = end($chaves);
-    // $dados[$ultimaChave] = rtrim($dados[$ultimaChave], "")
-    return $dados;
-    //$this->conection->insertMult($query, $dados);
+      $querys[] = $query .= "($id, $valor)";
+      //$i++;
+    } 
+    //return $querys;
+    // $dados = [
+    //   'query1' => "INSERT INTO `layout_machine` (fk_id_layout, fk_id_machine) VALUES ('1','2')",
+    //   'query2' => "INSERT INTO `layout_machine` (fk_id_layout, fk_id_machine) VALUES ('1','3')"
+    // ];
+    $this->conection->insertMult($querys);
   }
 
     public function listarLayout(): array
@@ -66,10 +61,11 @@ class MaquinaModelo extends ControladorDB
 
     public function filtrarLayout(string $id): array
     {
-      $query = "SELECT * FROM factory.layout WHERE id_layout = $id";
+      $query = "SELECT * FROM layout WHERE id_layout = $id";
 
       return $this->conection->select($query);
     }
+
    
     public function guardarProducao(string $layout, array $dadosLayout): void
      { 
