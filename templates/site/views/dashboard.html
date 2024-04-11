@@ -1,35 +1,70 @@
 {% extends 'base.html' %}
 
 {% block card %} <!--retirando/sobreescrevendo formatação de card-->
+  <main>
+  {% block main %}
 
 <canvas class="my-4 w-100 line-chart" id="myChart" width="900" height="380"></canvas>
-
+    
+  {% endblock %}
+</main>
+<div class="d-none" id="producao">{{producao}}</div>
 {% endblock %}
 
-{% block script %}
+
+  {% block script %}
+
+  
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('myChart');
+  let json = document.getElementById('producao').textContent;
+  json = JSON.parse(json);
+  let valores = [];
+  let maquinas = [];
 
-new Chart(ctx, {
-type: 'bar',
-data: {
- labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Black','Zebra','Morango','Uva','Limão'],
- datasets: [{
-   label: '# of Votes',
-   data: [12, 19, 3, 5, 2, 3, 4, 5, 7, 8, 2],
-   borderWidth: 1
- }]
-},
-options: {
- scales: {
-   y: {
-     beginAtZero: true
-   }
- }
-}
-});
- </script>
+  //forEach percorre um array item por item(ou valor por assim dizer) e é na var valor que vamos guardar cada item que o forEach percorrer
+  json.forEach(function(valor) {
+    valores.push(Object.values(valor))
+    maquinas.push(Object.keys(valor))
+  })
+  console.log(valores)
+  console.log(maquinas)
+  let maquinasLabel;
+  
+  maquinasLabel = maquinas.map(function(maquina) {
+    return String(maquina)
+  }).join(', ')
+
+    console.log(maquinasLabel)
+
+  const ctx = document.getElementById('myChart');
+
+  let myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Black', 'Zebra', 'Morango', 'Uva', 'Limão'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 5, 6, 8, 0, 12, 10, 11],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Custom Chart Title'
+        }
+      }
+    }
+  });
+  
+</script>
 
 {% endblock %}

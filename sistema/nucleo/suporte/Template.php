@@ -1,6 +1,9 @@
 <?php
 
 namespace sistema\nucleo\suporte;
+
+use Twig\TwigFunction;
+
 class Template 
 {
     private \Twig\Environment $twig;

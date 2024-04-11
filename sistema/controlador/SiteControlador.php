@@ -30,25 +30,25 @@ class SiteControlador extends Controlador
         ]);
     }
 
-    public function post($dado) :void
+    public function post($dado = null) :void
     {
-        $modelo = (new MaquinaModelo())->filtrar($dado);
+         $modelo = (new MaquinaModelo())->filtrar($dado);
         
-        if(!$modelo) {
-            Helpers::redirecionar('404');
-        }
-
+         if(!$modelo) {
+             Helpers::redirecionar('404');
+         }
         echo $this->template->rendenrizar('post.html',
         [
             'modelo' => (new MaquinaModelo())->filtrar($dado)
         ]);
     }
 
-    public function dashboard(): void
+    public function dashboard(string $layout): void
     {
+         var_dump((new MaquinaModelo)->buscarProducao($layout));
         echo $this->template->rendenrizar('dashboard.html',
         [
-        
+            'producao' => (new MaquinaModelo)->buscarProducao($layout)
         ]);
     }
 
@@ -57,9 +57,7 @@ class SiteControlador extends Controlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($dados)) {
             
-            $dados['operacoes'] = (int)$dados['operacoes'];
-            $dados['qtd'] = (int)$dados['qtd'];
-            (new MaquinaModelo)->cadastrar($dados);
+            (new MaquinaModelo)->cadastrarMaquina($dados);
             // Para validações posteriormente
             // foreach ($dados as $key => $value) 
             //{
@@ -77,19 +75,64 @@ class SiteControlador extends Controlador
          ]);
     }
 
-    public function cadastroLayout(): void
-    {
+    public function montarLayout($id): void
+    {   
+         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+         if (!empty($dados)) {
+            var_dump((new MaquinaModelo)->montarLayout($dados));
+        }
+          
         echo $this->template->rendenrizar('cadastrolayout.html',
         [
-            'maquinas' => (new MaquinaModelo)->buscar()
+            'maquinas' => (new MaquinaModelo)->buscar(),
+            'layouts' => (new MaquinaModelo)->filtrarLayout($id)
         ]);
     }
 
-    public function producao(): void
-    {
+    public function producao($layout): void
+    {             
+        // $maquinas = (new MaquinaModelo)->BuscarMaqTabela($layout);
+        // if(!$maquinas) {
+        //     Helpers::redirecionar('404');
+        // }
+        
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $dados['data'] ="'" .DATA_ATUAL."'";
+        if (!empty($dados)) {
+           (new MaquinaModelo)->guardarProducao($layout, $dados);
+           
+        }
+        array_pop($maquinas);
+
         echo $this->template->rendenrizar('producao.html',
         [
-        
+            'maquinas' => $maquinas,
+            'DATA_ATUAL' => DATA_ATUAL
         ]);
+    }
+
+    public function layouts(): void
+    {
+        $dados = filter_input_array(INPUT_POST,FILTER_DEFAULT);
+        if (!empty($dados)) {
+            (new MaquinaModelo)->cadastrarLayout($dados);
+        }
+
+        echo $this->template->rendenrizar('layouts.html',
+        [
+            'layouts' => (new MaquinaModelo)->listarLayout(),
+            'URL_DEV' => URL_DEV
+        ]);
+    }
+
+    public function deletar($id): void
+    {
+        //$id = filter_input(INPUT_POST, FILTER_DEFAULT);
+
+        if (!empty($id)) {
+            (new MaquinaModelo)->deletar($id);
+        }
+
+        Helpers::redirecionar('layouts');
     }
 }

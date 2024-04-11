@@ -10,10 +10,12 @@ try {
     SimpleRouter::get(BASE_ROUTE.'404','SiteControlador@erro404');
     SimpleRouter::get(BASE_ROUTE.'sobre','SiteControlador@sobre');
     SimpleRouter::get(BASE_ROUTE.'post/{dado}','SiteControlador@post');
-    SimpleRouter::get(BASE_ROUTE.'dashboard','SiteControlador@dashboard');
-    SimpleRouter::match(['get','post'],BASE_ROUTE.'cadastro','SiteControlador@cadastroMaq');
-    SimpleRouter::match(['get','post'],BASE_ROUTE.'layout','SiteControlador@cadastroLayout');
-    SimpleRouter::match(['get','post'],BASE_ROUTE.'producao','SiteControlador@producao');
+    SimpleRouter::get(BASE_ROUTE.'dashboard/{layout}','SiteControlador@dashboard');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'maquinas/cadastro','SiteControlador@cadastroMaq');
+    SimpleRouter::match(['get','post'], BASE_ROUTE.'layouts/montar/{id}','SiteControlador@montarLayout');
+    SimpleRouter::get(BASE_ROUTE.'layouts/deletar/{id}','SiteControlador@deletar');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'layouts/{layout}/producao','SiteControlador@producao');
+    SimpleRouter::match(['get','post'],BASE_ROUTE.'layouts','SiteControlador@layouts');
     SimpleRouter::start();
 
 } catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $e) {

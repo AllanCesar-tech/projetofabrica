@@ -22,7 +22,7 @@ class EasyPDO
     // CONNETION PROPERTIES
     // ------------------------------------------------------------------------
     private $db_host = 'localhost';
-    private $db_name = 'fabrica';
+    private $db_name = 'factory';
     private $db_user = 'root';
     private $db_pass = '';
     private $db_char = 'utf8';
@@ -150,6 +150,40 @@ class EasyPDO
         return $results;
     }
     
+    // ========================================================================
+    public function create($query, $parameters = null)
+    {
+        // runs an CREATE query
+        if (!preg_match("/^CREATE/i", trim($query))) {
+            $this->error('Not a SQL INSERT statment.');
+            return null;
+        }
+
+        $command = null;
+
+        // query execution
+        // execution
+        try {
+
+            $command = $this->connection->prepare($query);
+            if ($parameters != null) {
+                $command->execute($parameters);
+            } else {
+                $command->execute();
+            }
+        } catch (\PDOException $e) {
+            $this->affectedRows = 0;
+            $this->error($e->getMessage());
+            return null;
+        }
+
+        //affected rows
+        $this->affectedRows = $command->rowCount();
+
+        //close connection
+        $this->connection = null;
+    }
+
     // ========================================================================
     public function insert($query, $parameters = null)
     {
@@ -386,5 +420,41 @@ class EasyPDO
         $class_name = explode('\\', __CLASS__);
         $class_name = end($class_name);
         die(PHP_EOL . "$class_name - ERROR - $message" . PHP_EOL);
+    }
+
+    // ========================================================================
+    public function insertMult(string $query, $parameters)
+    {
+         // runs an INSERT query
+         if (!preg_match("/^INSERT/i", trim($query))) {
+            $this->error('Not a SQL INSERT statment.');
+            return null;
+        }
+
+        $command = null;
+
+        // query execution
+        // execution
+        try {
+
+            $command = $this->connection->prepare($query);
+            if ($parameters != null) {
+                foreach($parameters as $parametro) {
+                    $command->execute($parametro);
+                }
+            } else {
+                $command->execute();
+            }
+        } catch (\PDOException $e) {
+            $this->affectedRows = 0;
+            $this->error($e->getMessage());
+            return null;
+        }
+
+        //affected rows
+        $this->affectedRows = $command->rowCount();
+
+        //close connection
+        $this->connection = null;
     }
 }

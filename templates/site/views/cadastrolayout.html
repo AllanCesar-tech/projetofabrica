@@ -10,7 +10,7 @@
     <!--o inline-flex foi essencial para que os elementos ocupassem apenas seu conteudo, facilitando para criar o espaço perfeito entre label e input, pois o input estava apresentando problema no tamanho, mesmo com a propriedade col-->
     <div class="d-inline-flex align-items-start">
         <label for="tituloLayout" class="fs-6 display-1 form-label col-5 ms-2 ps-2 align-self-center">Nome do Layout</label>
-        <input type="text" class="form-control" id="tituloLayout" name="titulo">
+        <input type="text" class="form-control text-uppercase" id="tituloLayout" name="layout" value="{{layouts.0.denomination}}" readonly>
     </div>
     
     <!-- w-100 para que o container dê total espaço para expanção dos botões e flex-wrap para quebra de linha -->
@@ -18,8 +18,8 @@
         <!--O col-2 determina a largura disponível igualmente para cada botão, o d-flex serve para usar o display flex e aplicar a propriedade flex-fill onde faz com que determinado elemento ocupe todo o espaço que tem disponivel, ou seja, o col-2. Por último, a propriedade btn-lg no label deixa o nome do botão proporcional e responsivo ao preenchimento do flex-fill-->
             {% for maquina in maquinas %}
         <div class="col-2 d-flex mb-2">
-            <input type="checkbox" class="btn-check" id="{{maquina.modelo}}" autocomplete="off" name="{{maquina.modelo}}" value="VARCHAR(50)">
-            <label for="{{maquina.modelo}}" class="flex-fill rounded-4 btn btn-lg btn-outline-primary me-2">{{maquina.modelo}}</label>
+            <input type="checkbox" class="btn-check" id="{{maquina.model}}" autocomplete="off" name="{{maquina.model}}" value="{{maquina.id_machine}}">
+            <label for="{{maquina.model}}" class="flex-fill rounded-4 btn btn-lg btn-outline-primary me-2">{{maquina.model}}</label>
         </div>
         {% endfor %}
 
