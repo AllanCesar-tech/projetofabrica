@@ -25,9 +25,9 @@
         <td>{{layout.observation}}</td>
         <td>
           <div class="btn-group d-flex" role="group">
-            <a href="http://localhost/projetofabrica/layouts/montar/{{layout.id_layout}}" class="btn btn-sm btn-primary rounded-4 col-1 mx-1">Montar</a>
-            <a href="#" class="btn btn-sm btn-success rounded-4 col-1 mx-1">Máquinas</a>
-            <a href="http://localhost/projetofabrica/layouts/deletar/{{layout.id_layout}}" class="btn btn-sm btn-danger rounded-4 col-1 mx-1">Excluir</a>
+            <a href="{{URL_DEV}}produção/{{layout.id_layout}}" class="btn btn-sm btn-primary rounded-4 col-1 mx-1">Produzir</a>
+            <a href="{{URL_DEV}}layouts/montar/{{layout.id_layout}}" class="btn btn-sm btn-success rounded-4 col-1 mx-1">Máquinas</a>
+            <a href="{{URL_DEV}}layouts/deletar/{{layout.id_layout}}" class="btn btn-sm btn-danger rounded-4 col-1 mx-1">Excluir</a>
           </div>
         </td>
       </tr>

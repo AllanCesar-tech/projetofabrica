@@ -6,11 +6,6 @@ use sistema\nucleo\ControladorDB;
 
 class MaquinaModelo extends ControladorDB
 {
-    public function filtrar(string $dado) :array|bool
-    {
-        $query = "SELECT * FROM maquina WHERE modelo = '{$dado}'";
-       return $this->conection->select($query);
-    }
     
     public function buscarMaq(): array
     {
@@ -66,27 +61,24 @@ class MaquinaModelo extends ControladorDB
       return $this->conection->select($query);
     }
 
-   
-    public function guardarProducao(string $layout, array $dadosLayout): void
+      public function buscarLayout_Machine(string $layout): array
+      {
+        $query = "SELECT m.id_machine, m.model, m.designation FROM layout_machine AS lm JOIN machine AS m ON lm.fk_id_machine = m.id_machine WHERE fk_id_layout = $layout 
+        ORDER BY fk_id_machine ASC";
+        
+        return $this->conection->select($query);
+      }
+
+    public function guardarProducao(string $layout, array $dados)
      { 
-      $query = "INSERT INTO fabrica.$layout (";
-
-      foreach($dadosLayout as $maquina => $producaoDoDia) {
-        $query .= $maquina. ", ";
-      }
-
-      $query = rtrim($query, ", "). ")";
-      $query .= " VALUES (";
-
-      foreach($dadosLayout as $producaoDoDia) {
-        $query .=$producaoDoDia.", ";
-      }
-
-      $query = rtrim($query, ", "). ")";
-
-      //return $query;
-      $this->conection->insert($query);
+      $data = DATA;
+      foreach ($dados as $id_maquina => $operações) {
+        $query = "INSERT INTO production (fk²_id_layout, fk²_id_machine, operations, production_at) VALUES ";
+        $querys[] = $query .= "($layout, $id_maquina, $operações, $data)";
+      } 
       
+      $this->conection->insertMult($querys);
+      // return $querys;
     }
 
     public function buscarProducao(string $layout)
@@ -106,4 +98,5 @@ class MaquinaModelo extends ControladorDB
       $query = "DELETE FROM layout WHERE id_layout = $id";
       $this->conection->delete($query);
     }
+    
 }

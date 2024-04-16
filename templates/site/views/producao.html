@@ -11,8 +11,8 @@
     <div class="input-group">
         {% for maquina in maquinas %}
         <div class="col-4 d-flex py-3 pe-4">
-            <label for="{{maquina.maquinas}}" class="input-group-text">{{maquina.maquinas}}</label>
-            <input type="number" class="form-control me-3" id="{{maquina.maquinas}}" placeholder="Operações" name="{{maquina.maquinas}}">     
+            <label for="{{maquina.model}}" class="input-group-text">{{maquina.model}}</label>
+            <input type="number" class="form-control me-3" id="{{maquina.model}}" placeholder="Operações" name="{{maquina.id_machine}}">     
         </div> 
         {% endfor %}
         <div class="col-4 d-flex py-3 pe-4">
@@ -20,7 +20,9 @@
             <input type="date" class="form-control me-3" id="data" value="{{DATA_ATUAL}}" readonly>    
         </div>        
     </div>
-    <div class="d-flex justify-content-end col-10 mt-2"><button class="btn btn-primary">Finalizar</button></div>
+    <div class="d-flex justify-content-end col-10 mt-2">
+        <button class="btn btn-primary">Finalizar</button>
+    </div>
 </form>
 
 {% endblock %}

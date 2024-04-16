@@ -30,27 +30,27 @@ class SiteControlador extends Controlador
         ]);
     }
 
-    public function post($dado = null) :void
-    {
-         $modelo = (new MaquinaModelo())->filtrar($dado);
+    // public function post($dado = null) :void
+    // {
+    //      $modelo = (new MaquinaModelo())->filtrar($dado);
         
-         if(!$modelo) {
-             Helpers::redirecionar('404');
-         }
-        echo $this->template->rendenrizar('post.html',
-        [
-            'modelo' => (new MaquinaModelo())->filtrar($dado)
-        ]);
-    }
+    //      if(!$modelo) {
+    //          Helpers::redirecionar('404');
+    //      }
+    //     echo $this->template->rendenrizar('post.html',
+    //     [
+    //         'modelo' => (new MaquinaModelo())->filtrar($dado)
+    //     ]);
+    // }
 
-    public function dashboard(string $layout): void
-    {
-         var_dump((new MaquinaModelo)->buscarProducao($layout));
-        echo $this->template->rendenrizar('dashboard.html',
-        [
-            'producao' => (new MaquinaModelo)->buscarProducao($layout)
-        ]);
-    }
+    // public function dashboard(string $layout): void
+    // {
+    //      var_dump((new MaquinaModelo)->buscarProducao($layout));
+    //     echo $this->template->rendenrizar('dashboard.html',
+    //     [
+    //         'producao' => (new MaquinaModelo)->buscarProducao($layout)
+    //     ]);
+    // }
 
     public function cadastroMaq(): void
     {
@@ -90,24 +90,16 @@ class SiteControlador extends Controlador
         ]);
     }
 
-    public function producao($layout): void
+    public function produção($layout): void
     {             
-        // $maquinas = (new MaquinaModelo)->BuscarMaqTabela($layout);
-        // if(!$maquinas) {
-        //     Helpers::redirecionar('404');
-        // }
-        
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $dados['data'] ="'" .DATA_ATUAL."'";
         if (!empty($dados)) {
-           (new MaquinaModelo)->guardarProducao($layout, $dados);
-           
+            (new MaquinaModelo)->guardarProducao($layout,$dados);
         }
-        array_pop($maquinas);
-
-        echo $this->template->rendenrizar('producao.html',
+        
+        echo $this->template->rendenrizar('producao.html', 
         [
-            'maquinas' => $maquinas,
+            'maquinas' => (new MaquinaModelo)->buscarLayout_Machine($layout),
             'DATA_ATUAL' => DATA_ATUAL
         ]);
     }
