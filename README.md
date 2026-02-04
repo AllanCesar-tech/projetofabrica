@@ -1,4 +1,4 @@
-Projeto Fábrica de Confecção de Vestuários
+<h1 align="center">Projeto Fábrica de Confecção de Vestuários</h1>
 Este projeto foi desenvolvido de forma rápida e está em andamento, ainda incompleto. O código atual ainda precisa de melhorias para ficar mais limpo, organizado e profissional.
 
 O objetivo principal deste projeto é criar uma solução para armazenar informações sobre todas as máquinas utilizadas em uma fábrica de confecção, incluindo os diferentes layouts de máquinas utilizados ao longo do tempo. Isso é importante porque, frequentemente, é necessário alterar o layout das máquinas devido a defeitos ou à falta de operadores. Além disso, o sistema registra quanto cada máquina produziu em um determinado layout, por dia.
